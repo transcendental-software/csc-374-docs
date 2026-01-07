@@ -1,7 +1,7 @@
 title: CSC 374 Lab Assignment 0
 description: Basics of Shell and Basics of C
 
-baseurl: "/csc-374-lab0"
+baseurl: "/csc-374"
 
 remote_theme: JV-conseil/jekyll-theme-read-the-docs
 

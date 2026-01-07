@@ -2,7 +2,7 @@
 title: Basics of Shell
 ---
 
-# Basics of Shell
+# Lab Assignment 0 Basics of Shell
 
 The following is a crash course on using the command line on UNIX or GNU/Linux systems. The prompt in these examples is simply written `$`; on the server, it will look like:
 
