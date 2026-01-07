@@ -11,3 +11,4 @@ This informaiton is incomplete and you will need to have access to D2L in order 
 ## Quick Links
 - [Lab Assignment 0 Basics of Shell](01-bos.md)
 - [Lab Assignment 0 Basics of C](02-boc.md)
+- Lab Assignment 1
