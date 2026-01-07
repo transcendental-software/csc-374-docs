@@ -18,7 +18,7 @@ You will connect to the server `matrix.cdm.depaul.edu` (**cdmcscaoprd01**) via [
 ### 1.2. Logging in
 Use your lowercase DePaul Campus Connect account name and password to log into the server (e.g., ALEX42 becomes alex42).
 
-```shell
+```
 $ ssh alex42@matrix.cdm.depaul.edu
   ...
 Are you sure you want to continue connecting (yes/no/[fingerprint])?  yes
@@ -30,7 +30,7 @@ Last login: Mon Jan 13 12:33:17 2025 from 216.220.181.92
 
 **Note:** If you had to use that server in a previous session, you may get an error message along the lines of:
 
-```shell
+```
 WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
 IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
 ...
@@ -46,7 +46,7 @@ I recommend that you pick a randomly generated password and then you create an S
 - You put the public key on the remote computer (using `ssh-copy-id USER@SERVER` or manually by adding it to the remote file `~/.ssh/authorized_keys`).
 - Subsequent logins from your home computer will be asking for the passphrase of your key (if any) rather than your password and you can use [`ssh-agent(1)`](https://man7.org/linux/man-pages/man1/ssh-agent.1.html) to have to type your password only once per session.
 
-[This page](https://wiki.archlinux.org/index.php/SSH_keys) has everything you didn’t know you wanted to know about SSH keys, while [this one](https://phoenixnap.com/kb/generate-ssh-key-windows-10) covers how to generate keys on Windows 10 (Mac users can follow the Linux way).
+[This page](https://wiki.archlinux.org/index.php/SSH_keys) has everything you didn’t know you wanted to know about SSH keys, while [this one](https://phoenixnap.com/kb/generate-ssh-key-windows-10) covers how to generate keys on Windows 10 (Mac domain users can follow the Linux way).
 
 ### 1.4. About paths in Linux
 
@@ -166,31 +166,56 @@ none are given, to standard output.  Synopsis:
 
 Arrows are used to move around, and `q` to quit.
 
-## 3. Manipulating files
+## 3. Cloning the repository using Git
 
-### 3.1. List files
+[`Git`](https://git-scm.com/) is a distributed version control system that tracks changes in source code during software development. It is the industry standard for version control. `Git` usually operates on a repository (often shortened to `repo`), which is a storage location where your project's files and revision history are kept. A project may have multiple `repos`, each of them potentially located on a differen machine.
+
+### 3.1. Basic Git Commands
+
+`Git` provides you with a set of primitives that allows you to synchronize your repository with a source repository. Here are some of the most common `Git` commands you will use:
+
+- `git status`: Displays the state of the working directory and the staging area of your repo.
+- `git add <file>`: Adds a change in the working directory to the staging area of your repo.
+- `git commit -m "message"`: Captures a snapshot of the project's currently staged changes.
+- `git push`: Uploads your local repository content to a remote repo.
+- `git pull`: Fetches and downloads content from a remote repos and immediately updates the local repo to match that content.
+
+### 3.2 Cloning the Lab Assignment 0 Repo
+
+To start the lab, you must clone the starter code repository. Run the following command:
+
+```shell
+$ cd ~
+$ git clone https://github.com/transcendental-software/csc-374-lab0.git
+```
+
+This command creates a directory containing all the necessary files for the assignment. You can then navigate into it using `cd`.
+
+## 4. Manipulating files
+
+### 4.1. List files
 
 The command [`ls(1)`](https://man7.org/linux/man-pages/man1/ls.1.html) is used to list files. As an argument, it can take the files to be listed, or a directory:
 
 ```shell
-$ cd ~prof/00-bos
+$ cd ~/csc-374-lab0/bos
 $ ls
 dir1  dir2  dir3  f1  f2  f3
-$ ls ~prof/00-bos
+$ ls ~/csc-374-lab0/bos
 dir1  dir2  dir3  f1  f2  f3
 ```
 
 To get more information on the files, use the option `-l`:
 
 ```shell
-$ ls -l ~prof/00-bos
+$ ls -l ~/csc-374-lab0/bos
 total 0
-drwx------ 2 USER users 6 Jan  7 17:51 dir1
-drwxr-xr-x 2 USER users 6 Jan  7 17:51 dir2
-drwx--x--x 2 USER users 6 Jan  7 17:51 dir3
--rw------- 1 USER users 0 Jan  7 17:51 f1
--rwxr-xr-x 1 USER users 0 Jan  7 17:51 f2
--rw-r--r-- 1 USER users 0 Jan  7 17:51 f3
+drwx------ 2 USER domain users 6 Jan  7 17:51 dir1
+drwxr-xr-x 2 USER domain users 6 Jan  7 17:51 dir2
+drwx--x--x 2 USER domain users 6 Jan  7 17:51 dir3
+-rw------- 1 USER domain users 0 Jan  7 17:51 f1
+-rwxr-xr-x 1 USER domain users 0 Jan  7 17:51 f2
+-rw-r--r-- 1 USER domain users 0 Jan  7 17:51 f3
 ```
 
 The first column indicates the rights on the file. It is to be read as:
@@ -205,27 +230,28 @@ You wouldn’t be able to go into `dir1`, read the file `f1`,
 A hidden file is a file whose name starts with a period. We have already seen two “special” hidden files: `.`, the current directory, and `..`, the parent directory. To view hidden files when listing, use `-a`:
 
 ```shell
-$ ls -l -a ~prof/00-bos
+$ ls -l -a ~/csc-374-lab0/bos
 total 0
-drwxrwxr-x 5 USER users 91 Jan  7 17:53 .
-drwxr-xr-x 4 USER users 38 Jan  7 17:51 ..
-drwx------ 2 USER users  6 Jan  7 17:51 dir1
-drwxr-xr-x 2 USER users  6 Jan  7 17:51 dir2
-drwx--x--x 2 USER users  6 Jan  7 17:51 dir3
--rw------- 1 USER users  0 Jan  7 17:51 f1
--rwxr-xr-x 1 USER users  0 Jan  7 17:51 f2
--rw-r--r-- 1 USER users  0 Jan  7 17:51 f3
--rw-rw-r-- 1 USER users  0 Jan  7 17:53 .hiddenfile
+drwxrwxr-x 5 USER domain users 91 Jan  7 17:53 .
+drwxr-xr-x 4 USER domain users 38 Jan  7 17:51 ..
+drwx------ 2 USER domain users  6 Jan  7 17:51 dir1
+drwxr-xr-x 2 USER domain users  6 Jan  7 17:51 dir2
+drwx--x--x 2 USER domain users  6 Jan  7 17:51 dir3
+-rw------- 1 USER domain users  0 Jan  7 17:51 f1
+-rwxr-xr-x 1 USER domain users  0 Jan  7 17:51 f2
+-rw-r--r-- 1 USER domain users  0 Jan  7 17:51 f3
+-rw-rw-r-- 1 USER domain users  0 Jan  7 17:53 .hiddenfile
 ```
 
-### 3.2. Copying, moving (renaming), removing files.
+### 4.2. Copying, moving (renaming), removing files.
 
 To copy files, use [`cp(1)`](https://man7.org/linux/man-pages/man1/cp.1.html). To move files (and rename them) use [`mv(1)`](https://man7.org/linux/man-pages/man1/mv.1.html). To delete files use [`rm(1)`](https://man7.org/linux/man-pages/man1/rm.1.html).
 
 ```shell
-$ cp ~prof/00-bos/f2 .
+$ cd ~
+$ cp ~/csc-374-lab0/bos/f2 .
 $ ls
-f2
+csc374-lab0 f2
 $ mv f2 g2
 $ ls
 g2
@@ -236,16 +262,13 @@ $ ls
 To copy and remove directories, use the option `-r`:
 
 ```shell
-$ cp ~prof/00-bos .
-cp: omitting directory ‘/home/prof/00-bos’
-$ cp -r ~prof/00-bos .
-cp: cannot open ‘/home/prof/00-bos/f1’ for reading: Permission denied
-cp: cannot access ‘/home/prof/00-bos/dir1’: Permission denied
-cp: cannot access ‘/home/prof/00-bos/dir3’: Permission denied
+$ cp ~/csc-374-lab0/bos .
+cp: omitting directory ‘/home/USER/csc-374-lab0/bos’
+$ cp -r ~/csc-374-lab0/bos lecture0
 $ ls
-lecture0
+csc-374-lab0 lecture0
 $ ls lecture0
-dir1  dir2  dir3  f2  f3
+dir1  dir2  dir3  f1 f2  f3
 $ rm -r lecture0
 $ ls lecture0
 ls: cannot access lecture0: No such file or directory
@@ -253,7 +276,7 @@ ls: cannot access lecture0: No such file or directory
 
 Lots of commands take `-r` or `-R` as an option to go recursively, that is, through subdirectories (e.g., `ls -R`).
 
-### 3.3. Creating empty files and directories
+### 4.3. Creating empty files and directories
 
 To create empty files, use [`touch(1)`](https://man7.org/linux/man-pages/man1/touch.1.html), to create an empty directory, use [`mkdir(1)`](https://man7.org/linux/man-pages/man1/mkdir.1.html):
 
@@ -263,28 +286,28 @@ $ touch dir1/a dir2/b
 $ ls -R -l
 .:
 total 0
-drwxrwxr-x 2 stu stu 15 Jan  7 18:07 dir1
-drwxrwxr-x 2 stu stu 15 Jan  7 18:07 dir2
+drwxrwxr-x 2 USER domain users 15 Jan  7 18:07 dir1
+drwxrwxr-x 2 USER domain users 15 Jan  7 18:07 dir2
 
 ./dir1:
 total 0
--rw-rw-r-- 1 stu stu 0 Jan  7 18:07 a
+-rw-rw-r-- 1 USER domain users 0 Jan  7 18:07 a
 
 ./dir2:
 total 0
--rw-rw-r-- 1 stu stu 0 Jan  7 18:07 b
+-rw-rw-r-- 1 USER domain users 0 Jan  7 18:07 b
 $ rm -r dir1 dir2
 $ ls
 ```
 
-## 4. Viewing and editing files
+## 5. Viewing and editing files
 
-### 4.1. Viewing files
+### 5.1. Viewing files
 
 The main commands to view files quickly are [`cat(1)`](https://man7.org/linux/man-pages/man1/cat.1.html) and [`less(1)`](https://man7.org/linux/man-pages/man1/less.1.html). [`cat(1)`](https://man7.org/linux/man-pages/man1/cat.1.html) reads the files provided as arguments, and prints them verbatim:
 
 ```shell
-$ cp ~prof/00-boc/hello.c .
+$ cp ~/csc-374-lab0/boc/hello.c .
 $ cat hello.c
 #include <stdio.h>
 
@@ -315,7 +338,7 @@ int main()
 - `/`: search for a string (then `n` to get to the next match).
 - `-i`: toggle case sensitivity in search.
 
-### 4.2. Editing files
+### 5.2. Editing files
 
 [ed is the standard text editor](https://www.gnu.org/fun/jokes/ed-msg.txt), but no one uses it anymore. I recommend you become familiar with [`vim`](https://www.vim.org/) or [`emacs(1)`](https://man7.org/linux/man-pages/man1/emacs.1.html).
 
