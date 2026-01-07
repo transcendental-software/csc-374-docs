@@ -33,7 +33,7 @@ Last login: Mon Jan 13 12:33:17 2025 from 216.220.181.92
 $ ssh -J alex42@sshjump.depaul.edu alex42@matrix.cdm.depaul.edu
 ```
 
-More information about it can be found here:
+More information about it can be found here:  
 [https://depaul.service-now.com/sp/en/ssh-proxy-jump-host?id=kb_article_view&sysparm_article=KB0013112](https://depaul.service-now.com/sp/en/ssh-proxy-jump-host?id=kb_article_view&sysparm_article=KB0013112)
 
 **Note:** If you had to use that server in a previous session, you may get an error message along the lines of:
