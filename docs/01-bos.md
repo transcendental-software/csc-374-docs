@@ -13,7 +13,7 @@ The following is a crash course on using the command line on UNIX or GNU/Linux s
 ## 1. Connecting and transferring files
 ### 1.1. SSH client
 
-You will connect to the server `matrix.cdm.depaul.edu` (**cdmcscaoprd01**) via [`SSH`](https://wikipedia.org/wiki/SSH) and clone the lab files using [`git`](https://git-scm.com/book/en/v2). If you use Mac OS or Linux, these are standard programs accessible through any terminal. If you use Windows, then I recommend using [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/learn/ps101/01-getting-started?view=powershell-7.5), or [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install), or [Git BASH](https://gitforwindows.org/), or [PuTTy](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).
+You will connect to the server `matrix.cdm.depaul.edu` (**cdmcscaoprd01**) via [`SSH`](https://wikipedia.org/wiki/SSH) and clone the lab files using [`Git`](https://git-scm.com/book/en/v2). If you use Mac OS or Linux, these are standard programs accessible through any terminal. If you use Windows, then I recommend using [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/learn/ps101/01-getting-started?view=powershell-7.5), or [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install), or [Git BASH](https://gitforwindows.org/), or [PuTTy](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).
 
 ### 1.2. Logging in
 Use your lowercase DePaul Campus Connect account name and password to log into the server (e.g., ALEX42 becomes alex42).
