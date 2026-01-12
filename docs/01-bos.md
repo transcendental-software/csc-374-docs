@@ -74,7 +74,7 @@ Log into the remote machine, create and copy the public key to authorized_keys:
 local-machine$ ssh USER@matrix.cdm.depaul.edu
 remote-machine$ mkdir .ssh # create the .ssh directory if it does not exist
 remote-machine$ touch .ssh/authorized_keys # create the authorized_keys file if it does not exists
-remote-machine$ echo "YOUR-PUBLIC-KEY" >> .ssh/authorized_keys # append your public key to the authorized_keys file
+remote-machine$ echo "YOUR-PUBLIC-KEY" >> .ssh/authorized_keys # append your public key to authorized_keys
 remote-machine$ chmod 755 .ssh; chmod 644 .ssh/authorized_keys # set the proper permissions
 
 ```
