@@ -56,7 +56,32 @@ I recommend that you pick a randomly generated password and then you create an S
 
 [This page](https://wiki.archlinux.org/index.php/SSH_keys) has everything you didn’t know you wanted to know about SSH keys, while [this one](https://phoenixnap.com/kb/generate-ssh-key-windows-10) covers how to generate keys on Windows 10 (Mac domain users can follow the Linux way).
 
-### 1.4. About paths in Linux
+### 1.4. Step-by-step commands for setting up public-private key authentication
+
+Generate a new public-private key pair using default location:
+```shell
+local-machine$ ssh-keygen
+```
+
+Grab the content of the public key:
+```shell
+local-machine$ cat .ssh/id_ed25519.pub
+YOUR-PUBLIC-KEY
+```
+
+Log into the remote machine, create and copy the public key to authorized_keys:
+```shell
+local-machine$ ssh USER@matrix.cdm.depaul.edu
+remote-machine$ mkdir .ssh # create the .ssh directory if it does not exist
+remote-machine$ touch .ssh/authorized_keys # create the authorized_keys file if it does not exists
+remote-machine$ echo "YOUR-PUBLIC-KEY" >> .ssh/authorized_keys # append your public key to the authorized_keys file
+remote-machine$ chmod 755 .ssh; chmod 644 .ssh/authorized_keys # set the proper permissions
+
+```
+
+Now you should be able to to log in to the remote machine using the public-private key pair instead of using the password.
+
+### 1.5. About paths in Linux
 
 A path in UNIX/Linux is a string of the shape `/usr/bin/ls`; this refers to the file [`ls(1)`](https://man7.org/linux/man-pages/man1/ls.1.html) in the subdirectory `bin` of the directory `usr` that can be found at the root of the filesystem. In there, the first `/` indicates that the path is absolute, that is, it will point to the same file wherever it is mentioned. The relative path `bin/ls` refers to the file [`ls(1)`](https://man7.org/linux/man-pages/man1/ls.1.html) in the subdirectory `bin` of the current directory.
 
@@ -87,7 +112,7 @@ $ pwd
 /
 ```
 
-### 1.5. Transferring files
+### 1.6. Transferring files
 
 Suppose you have a file `test.txt` on your local computer, say on your desktop. To transfer it to the server using `scp`, use:
 
