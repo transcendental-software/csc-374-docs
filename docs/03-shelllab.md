@@ -2,9 +2,9 @@
 title: Shell Lab
 ---
 
-## 1. Overview
+## 1. Lab Assignment 1 Shell Lab
 
-Fluency with the shell is a life skill. How can you list 10 header files in `/usr/include/` that have at least 100 lines? How can you get all the unique second fields in a bunch of CSV files? How do you add a `#include` at the top of several files automatically? All of these tasks can be done in one line of shell scripting:
+Fluency with the shell is a life skill. How can you list 10 header files in `/usr/include/` that have at least 100 lines? How can you get all the unique second fields in a bunch of [CSV files](https://en.wikipedia.org/wiki/Comma-separated_values)? How do you add a `#include` at the top of several files automatically? All of these tasks can be done in one line of shell scripting:
 
 ```shell
 $ cd /usr/include; wc -l *.h | grep ' [1-9]\{3\}' | head -n 10
@@ -23,7 +23,7 @@ $ cd ~/src/algs4/data; cut -d, -f2 *.csv | sort | uniq -u
 $ cd ~/src/mycode; sed -i '1s/^/#include\n/' *.c
 ```
 
-The kind of commands in the above example are limited. To iterate through files, for instance, I have used globbing, i.e., simple wildcards: `*` is all files (including directories), `*.h` is all files ending with `.h`, and `[a-z]*` would be all files starting with a lowercase letter. These are expanded by the shell, in the sense that they are replaced by the actual list of files before calling the program. For instance, `echo` just prints its arguments, nothing else, yet:
+The kind of commands in the above example are limited. To iterate through files, for instance, I have used [globbing](https://tldp.org/LDP/abs/html/globbingref.html), i.e., simple wildcards: `*` is all files (including directories), `*.h` is all files ending with `.h`, and `[a-z]*` would be all files starting with a lowercase letter. These are expanded by the shell, in the sense that they are replaced by the actual list of files before calling the program. For instance, `echo` just prints its arguments, nothing else, yet:
 
 ```shell
 $ echo hello world
@@ -34,17 +34,17 @@ main.c lib.c
 
 If we need to iterate through files, rather than pass all filenames to a program (as with `wc`, `cut`, and `sed` above), we need an actual programming language. This is provided by your shell: it has `if` statements, `for` and `while` loops, and `case` switches. We will go over these and over a few commands in this lab.
 
-Shell scripts are slow, inefficient, in the same way a Swiss-army knife is bad at all the jobs you throw at it, but it can do them. Its power resides in the ability to express complicated tasks easily, making it extraordinarily common and useful for one-time or simple tasks. As with most scripting languages, there are several ways of doing any task (for the examples above, see this, this, and this), and although there are better ways than others, shell scripting is mostly about saving time, so the first working solution is the best.
+Shell scripts are slow, inefficient, in the same way a Swiss-army knife is bad at all the jobs you throw at it, but it can do them. Its power resides in the ability to express complicated tasks easily, making it extraordinarily common and useful for one-time or simple tasks. As with most scripting languages, there are several ways of doing any task (for the examples above, see [this](https://stackoverflow.com/questions/17058184/file-with-the-most-lines-in-a-directory-not-bytes), [this](https://www.unix.com/shell-programming-and-scripting/121170-return-list-unique-values-column-csv-format-file.html), and [this](https://superuser.com/questions/246837/how-do-i-add-text-to-the-beginning-of-a-file-in-bash)), and although there are better ways than others, shell scripting is mostly about saving time, so the first working solution is the best.
 
 This project is divided into 6 parts and a bonus part. The commands presented in each Part must be used in your solutions, except for the bonus part.
 
 ## 2. Downloading the assignment
 
-Start by extracting `~prof/shelllab-handout.tar.bz2` in your home:
+Start by accepting the GitHub Assignment by clicking on the invitation link from the assignment description on D2L. Then clone your repository in your home directory on the **matrix.cdm.depaul.edu** machine:
 
 ```shell
 $ cd ~/
-$ tar xvf ~prof/shelllab-handout.tar.bz2
+$ git clone git@github.com:transcendental-software/csc-374-lab1-USER.git
 ```
 
 This will cause a number of files to be unpacked into the directory. *You should only modify the files `src/*.sh`, and these are the only files that are submitted.* The `test` folder contains the different tests and grading examples for your program. Use the `make test` command to run the test driver. This would run all the tests for all parts. See Section 11.2 for more finely grained testing options.
@@ -69,15 +69,15 @@ $ ./test.sh
 value
 ```
 
-The first line of the script file should indicate which shell we will be using. Each of the solution files already contains that line, called a shebang:
+The first line of the script file should indicate which shell we will be using. Each of the solution files already contains that line, called a [shebang](https://tldp.org/LDP/abs/html/sha-bang.html):
 
 ```shell
 #!/bin/zsh -f
 ```
 
-This lets the kernel know that it should use the Z shell, a standard shell, for interpreting the program. The file is then processed as if it were typed into a shell. To read the documentation of the Z shell, look at its info page (type `info zsh`; search by typing `s`, an index is accessible with key `i`). Use `info info` to learn more about navigation into info pages.
+This lets the kernel know that it should use the [Z shell](https://en.wikipedia.org/wiki/Z_shell), a standard shell, for interpreting the program. The file is then processed as if it were typed into a shell. To read the documentation of the Z shell, look at its info page (type `info zsh`; search by typing `s`, an index is accessible with key `i`). Use `info info` to learn more about navigation into info pages.
 
-**Note:** The Z shell is now fairly standard. Since 2019, it is the default shell on macOS, and it is easily installed on all Linux distributions. Its scripting language alleviates a lot of the weird behaviors, peculiarities, and inconsistencies of the older shells (in particular the completely standard Bourne shell (`sh`) and Bourne Again shell (`bash`)), at the expense of backward compatibility.
+**Note:** The Z shell is now fairly standard. Since 2019, it is the default shell on macOS, and it is easily installed on all Linux distributions. Its scripting language alleviates a lot of the weird behaviors, peculiarities, and inconsistencies of the older shells (in particular the completely standard [Bourne shell (`sh`)](https://en.wikipedia.org/wiki/Bourne_shell) and [Bourne Again shell (`bash`)](https://en.wikipedia.org/wiki/Bourne_again_shell)), at the expense of backward compatibility.
 
 **Note:** All of your scripts already have “execution rights,” which is a technicality of the file system. If you write your own scripts and obtain `zsh: permission denied: ./myscript.sh`, this is likely due to the lack of execution rights. You can solve this by adding the right, using `chmod +x ./myscript.sh` (see the manpage of `chmod` for more).
 
@@ -128,7 +128,7 @@ lorem
 
 (This is equivalent to `sort myfile` since `sort` can read the contents from files passed as arguments, see its manpage. This is true of lots of commands.)
 
-We can also replace the standard input of a program with the standard output of another. This fundamental operation is called piping or pipelining and uses the `|` operator:
+We can also replace the standard input of a program with the standard output of another. This fundamental operation is called [piping or pipelining](https://tldp.org/LDP/lpg/node10.html) and uses the `|` operator:
 
 ```shell
 $ echo hello | sort

@@ -59,17 +59,20 @@ I recommend that you pick a randomly generated password and then you create an S
 ### 1.4. Step-by-step commands for setting up public-private key authentication
 
 Generate a new public-private key pair using default location:
+
 ```shell
 local-machine$ ssh-keygen
 ```
 
 Grab the content of the public key:
+
 ```shell
 local-machine$ cat .ssh/id_ed25519.pub
 YOUR-PUBLIC-KEY
 ```
 
 Log into the remote machine, create and copy the public key to authorized_keys:
+
 ```shell
 local-machine$ ssh USER@matrix.cdm.depaul.edu
 remote-machine$ mkdir .ssh # create the .ssh directory if it does not exist
