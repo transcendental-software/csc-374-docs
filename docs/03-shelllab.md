@@ -77,9 +77,9 @@ The first line of the script file should indicate which shell we will be using. 
 
 This lets the kernel know that it should use the [Z shell](https://en.wikipedia.org/wiki/Z_shell), a standard shell, for interpreting the program. The file is then processed as if it were typed into a shell. To read the documentation of the Z shell, look at its info page (type `info zsh`; search by typing `s`, an index is accessible with key `i`). Use `info info` to learn more about navigation into info pages.
 
-**Note:** The Z shell is now fairly standard. Since 2019, it is the default shell on macOS, and it is easily installed on all Linux distributions. Its scripting language alleviates a lot of the weird behaviors, peculiarities, and inconsistencies of the older shells (in particular the completely standard [Bourne shell (`sh`)](https://en.wikipedia.org/wiki/Bourne_shell) and [Bourne Again shell (`bash`)](https://en.wikipedia.org/wiki/Bourne_again_shell)), at the expense of backward compatibility.
+> **Note:** The Z shell is now fairly standard. Since 2019, it is the default shell on macOS, and it is easily installed on all Linux distributions. Its scripting language alleviates a lot of the weird behaviors, peculiarities, and inconsistencies of the older shells (in particular the completely standard [Bourne shell (`sh`)](https://en.wikipedia.org/wiki/Bourne_shell) and [Bourne Again shell (`bash`)](https://en.wikipedia.org/wiki/Bourne_again_shell)), at the expense of backward compatibility.
 
-**Note:** All of your scripts already have “execution rights,” which is a technicality of the file system. If you write your own scripts and obtain `zsh: permission denied: ./myscript.sh`, this is likely due to the lack of execution rights. You can solve this by adding the right, using `chmod +x ./myscript.sh` (see the manpage of `chmod` for more).
+> **Note:** All of your scripts already have “execution rights,” which is a technicality of the file system. If you write your own scripts and obtain `zsh: permission denied: ./myscript.sh`, this is likely due to the lack of execution rights. You can solve this by adding the right, using `chmod +x ./myscript.sh` (see the manpage of `chmod` for more).
 
 ### 3.2. Standard input: `<` and `|`
 
