@@ -137,31 +137,31 @@ hello
 
 Thus, the statement `cat file | sort` is functionally equivalent to `sort < file`. We strongly prefer the latter, since it doesn’t require running an extra command.
 
-**Note:** The program `echo` (which is actually a builtin, not a program) prints its arguments followed by a newline. If we wanted multiple lines, we could do:
+> **Note:** The program `echo` (which is actually a builtin, not a program) prints its arguments followed by a newline. If we wanted multiple lines, we could do:
+> 
+> ```shell
+> $ echo 'line3\nline1\nline2' | sort
+> line1
+> line2
+> line3
+> ```
+> 
+> This is because `echo` interprets the two characters `\n` as a single newline. Another, more advanced option, is to use a subshell, which would have a sequence of `echo` separated by semicolons:
+> 
+> ```shell
+> $ { echo line1; echo line2; echo line3 } | sort
+> line1
+> line2
+> line3
+> ```
+> 
+> Try to answer these questions: What would `cat | cat` do? What about `cat < myfile | cat`?
 
-```shell
-$ echo 'line3\nline1\nline2' | sort
-line1
-line2
-line3
-```
-
-This is because `echo` interprets the two characters `\n` as a single newline. Another, more advanced option, is to use a subshell, which would have a sequence of `echo` separated by semicolons:
-
-```shell
-$ { echo line1; echo line2; echo line3 } | sort
-line1
-line2
-line3
-```
-
-Try to answer these questions: What would `cat | cat` do? What about `cat < myfile | cat`?
-
-**Note:** What do the words program, executable, builtin, and command mean?
-
-- **Program, executable**: These are synonymous. They refer to a file on the disk that can be executed (run). This can be a native assembly program (we will see how these files are laid out during the course) or a script (the interpreter of which being given in the shebang).
-- **Builtin**: You can “call” builtins in a shell just like a program, but instead of having the shell find the executable file and running it, the shell itself implements that feature. When you type `$ echo hello`, the program `/bin/echo` is not called; instead, the shell just prints `hello`. This is more efficient. Here are some other builtins implemented by the Z shell: `alias`, `bg`, `break`, `cd`, `continue`, `declare`, `echo`, `eval`, `exec`, `exit`, `export`, `false`, `fg`, `history`, `jobs`, `kill`, `printf`, `pwd`, `read`, `return`, `shift`, `source`, `stat`, `trap`, `true`, `wait`, `which`.
-- **Command**: This is the general term for a single instruction in a shell. They can either run a program or a builtin.
+> **Note:** What do the words program, executable, builtin, and command mean?
+> 
+> - **Program, executable**: These are synonymous. They refer to a file on the disk that can be executed (run). This can be a native assembly program (we will see how these files are laid out during the course) or a script (the interpreter of which being given in the shebang).
+> - **Builtin**: You can “call” builtins in a shell just like a program, but instead of having the shell find the executable file and running it, the shell itself implements that feature. When you type `$ echo hello`, the program `/bin/echo` is not called; instead, the shell just prints `hello`. This is more efficient. Here are some other builtins implemented by the Z shell: `alias`, `bg`, `break`, `cd`, `continue`, `declare`, `echo`, `eval`, `exec`, `exit`, `export`, `false`, `fg`, `history`, `jobs`, `kill`, `printf`, `pwd`, `read`, `return`, `shift`, `source`, `stat`, `trap`, `true`, `wait`, `which`.
+> - **Command**: This is the general term for a single instruction in a shell. They can either run a program or a builtin.
 
 ### 3.3. Quoting
 
@@ -209,7 +209,7 @@ $ echo -E '\'\'"' \""
 
 ### 3.4. Regular expressions
 
-Two of the most common programs used in scripting are `sed` and `grep`. They both rely on patterns to match lines of input files, and do something with them (`sed` transforms them, while `grep` just prints the matching lines). Patterns are universally expressed using regular expressions (regex), not to be confused with globbing. We will make sparse use of regexes in this lab, but it is an indispensable computer skill that you will sharpen over the years. Regexes are implemented in each and every programming language.
+Two of the most common programs used in scripting are `sed` and `grep`. They both rely on patterns to match lines of input files, and do something with them (`sed` transforms them, while `grep` just prints the matching lines). Patterns are universally expressed using [regular expressions (regex)](https://en.wikipedia.org/wiki/Regular_expression), not to be confused with [globbing](https://tldp.org/LDP/abs/html/globbingref.html). We will make sparse use of regexes in this lab, but it is an indispensable computer skill that you will sharpen over the years. Regexes are implemented in each and every programming language.
 
 A regex is a string that describes a simple string property, for instance “starts with some repetitions (possibly 0) of `b`, followed by a sequence of 3 digits and ends with a nondigit” (e.g., `bb314c` and `2a` match it, but `314` and `c1b` don’t). Rather than introducing regexes completely and formally, we will go through examples.
 
@@ -247,11 +247,11 @@ Let’s now cover some more involved regexes:
 
 It is often much easier to write a regex than to read one, so you can practice with the following (these are harder than what you’ll need in the lab):
 
-1. Write a regex for strings that start with `a`, end with `b`, and contain at least one `c`.
-2. Write a regex for strings that are IPv4 addresses (0.0.0.0 to 255.255.255.255).
-3. Write a regex for strings that are dates (say from 1/1/1900 to 12/31/2099).
-4. Write a regex that matches the substring of a CSV line that corresponds to the first two fields (e.g., matching `x,y` in `x,y,z,t`).
-5. We’ve seen that `^.*$` is any string. How would you write a regex for strings that contain only one kind of letter? The strings `aaaaaa`, `bb`, and `ccccc`, for instance, should match it, but not `ab` or `bc`. (There’s no “good” way of doing it with the regexes we’ve seen.)
+- Write a regex for strings that start with `a`, end with `b`, and contain at least one `c`.
+- Write a regex for strings that are IPv4 addresses (0.0.0.0 to 255.255.255.255).
+- Write a regex for strings that are dates (say from 1/1/1900 to 12/31/2099).
+- Write a regex that matches the substring of a CSV line that corresponds to the first two fields (e.g., matching `x,y` in `x,y,z,t`).
+- We’ve seen that `^.*$` is any string. How would you write a regex for strings that contain only one kind of letter? The strings `aaaaaa`, `bb`, and `ccccc`, for instance, should match it, but not `ab` or `bc`. (There’s no “good” way of doing it with the regexes we’ve seen.)
 
 To test regexes, you can use `grep`. Its first argument is a regex and it reads from the standard input by default. `grep` will print the matching input lines:
 
@@ -270,9 +270,9 @@ Reprinted by grep
 
 (Note that the repetitions are printed by `grep`.)
 
-Programming languages will always implement at least the regexes we just saw. However, many will implement all sorts of extensions, see for instance the Python module for regex and the info page for `grep` (run `info grep` then go to section 3).
+Programming languages will always implement at least the regexes we just saw. However, many will implement all sorts of extensions, see for instance [the Python module for regex](https://docs.python.org/3/library/re.html) and the info page for `grep` (run `info grep` then go to section 3).
 
-**Note:** The backslashes in grouping and disjunction (e.g., `\(a\|b\)`) are cumbersome. The simplest extension of regexes drops them (`grep -E` implements that, and so does Python). Further extensions allow nongreedy iterations (e.g., `^.*a` matches the last `a`, as `.*` is taken for as long as possible; some languages implement `^.*?a` to say “match `.*` on the shortest possible string”), and backward references (with Perl-style regexes, that `grep` understands with the `-P` flag, the regex `^(.)\1*$` matches any repeated sequence of the same letter). To go further, you can look at the regex howto of Python.
+> **Note:** The backslashes in grouping and disjunction (e.g., `\(a\|b\)`) are cumbersome. The simplest extension of regexes drops them (`grep -E` implements that, and so does Python). Further extensions allow nongreedy iterations (e.g., `^.*a` matches the last `a`, as `.*` is taken for as long as possible; some languages implement `^.*?a` to say “match `.*` on the shortest possible string”), and backward references (with Perl-style regexes, that `grep` understands with the `-P` flag, the regex `^(.)\1*$` matches any repeated sequence of the same letter). To go further, you can look at the [regex howto of Python](https://docs.python.org/3/howto/regex.html#regex-howto).
 
 ## 4. Part 1: Most frequent line
 
@@ -424,7 +424,7 @@ done
 The list of items can be replaced by:
 
 - **An array**: The only array we will be using is `$@`, the array of arguments to your program. To avoid any weird behavior with empty arguments (`myprog '' ''` has two arguments!), we should use `for elt in "$@";` instead of `for elt in $@;`.
-- **The output of a program** (not used in this lab). The syntax is then `for elt in $(cmd);`. To “split” the output of `cmd` into elements, the shell uses a special variable `$IFS` that contains the list of characters at which it should split.
+- **The output of a program** (not used in this lab). The syntax is then `for elt in $(cmd);`. To “split” the output of `cmd` into elements, the shell uses a special variable [`$IFS`](https://en.wikipedia.org/wiki/Input_Field_Separators) that contains the list of characters at which it should split.
 - **A globbing pattern** that matches filenames (not used in this lab), for instance `*` that matches all filenames, or `*.h` which matches all filenames with extension `.h`.
 
 ### 5.4. Writing the script
@@ -494,7 +494,7 @@ $ false; echo $?
 1
 ```
 
-2. **A numerical condition** `(( COND ))`. For instance, one can use `(( $# == 0 ))` or `(( 43 > 88 ))`. Numerical conditions are fairly powerful, as they can also use for instance the ternary conditional operator.
+2. **A numerical condition** `(( COND ))`. For instance, one can use `(( $# == 0 ))` or `(( 43 > 88 ))`. Numerical conditions are fairly powerful, as they can also use for instance the [ternary conditional operator](https://en.wikipedia.org/wiki/%3F:).
 3. **A test condition** `[[ COND ]]` (used once in this lab, in the next exercise; `[[` is an alias for the program `test`). This is used to test file properties and properties of strings. For instance, `[[ -e myfile ]]` tests that a file named `myfile` exists, and `[[ $var == "" ]]` tests that `$var` is the empty string.
 4. **A logical combination** of the above (not used in this lab), using `||` (or) `&&` (and) and `!` (not):
 
@@ -541,7 +541,7 @@ $ echo 'target' | grep -q 'a'; echo $?
 
 - **Variables as standard input**: You will receive the argument as the variable `$1` (that is, the first element of the array `$@` of arguments). To pass it on the standard input of a command `cmd`, the usual way is with `echo "$1" | cmd`. For technical reasons, it is not efficient to use a pipe simply to put a variable on the standard input; modern shells implement the better-looking construct `cmd <<< $1`. Can you explain the difference between this and `cmd < $1`?
 
-**Note:** The “technical reasons” mentioned above have to do with how pipes are traditionally implemented. In a command `cmd1 | cmd2`, the shell would create two new processes, for `cmd1` and `cmd2`, and branch the standard output of `cmd1` to the standard input of `cmd2`, which is a lot of work. Avoiding doing this just for `echo` can save a bit of time. More on this “branching” and “creating processes” during the session!
+> **Note:** The “technical reasons” mentioned above have to do with how pipes are traditionally implemented. In a command `cmd1 | cmd2`, the shell would create two new processes, for `cmd1` and `cmd2`, and branch the standard output of `cmd1` to the standard input of `cmd2`, which is a lot of work. Avoiding doing this just for `echo` can save a bit of time. More on this “branching” and “creating processes” during the session!
 
 ### 7.3. Writing the script
 
@@ -625,7 +625,7 @@ while read -r line; do
 done
 ```
 
-**Note:** To read from a file instead, we would have written `done < myfile` instead of `done`, or equivalently, `< myfile while` instead of `while`. If we had written `while read -r line < myfile` instead, every time `read` would have been called, `myfile` would have been reopened, and this would result in an infinite loop.
+> **Note:** To read from a file instead, we would have written `done < myfile` instead of `done`, or equivalently, `< myfile while` instead of `while`. If we had written `while read -r line < myfile` instead, every time `read` would have been called, `myfile` would have been reopened, and this would result in an infinite loop.
 
 - **eval**: This builtin takes one argument and executes it as is, as if interpreted by the shell. Consider:
 
@@ -656,14 +656,14 @@ wide
 web
 ```
 
-**Note:** There is an alternative, that comes in handy in multiple situations. The program `tee` reads its standard input and writes it to both the standard output and to a provided file. Consider:
-
-```shell
-$ echo hello | tee myfile
-hello
-$ cat myfile
-hello
-```
+> **Note:** There is an alternative, that comes in handy in multiple situations. The program `tee` reads its standard input and writes it to both the standard output and to a provided file. Consider:
+> 
+> ```shell
+> $ echo hello | tee myfile
+> hello
+> $ cat myfile
+> hello
+> ```
 
 Programs can output on the standard output (`echo hello`) or the error output (`echo hello >&2`, not used in this lab). To redirect the error output to a file, we use `2>` instead of `>`:
 
@@ -682,7 +682,7 @@ $ cat stderr
 to error out
 ```
 
-**Note:** When outputting to the error output (with `>&2`) or taking the error output to a file (with `2>`), the number 2 indicates the so-called file descriptor of the output. Three numbers are reserved: 0 is the standard input, 1 the standard output, and 2 the error output. More on this later in the session.
+> **Note:** When outputting to the error output (with `>&2`) or taking the error output to a file (with `2>`), the number 2 indicates the so-called file descriptor of the output. Three numbers are reserved: 0 is the standard input, 1 the standard output, and 2 the error output. More on this later in the session.
 
 ### 8.3. Writing the script
 
@@ -768,15 +768,15 @@ $ i=30; seq $((i + 1)) 34
 
 This last example also illustrates how simple arithmetic computations can be made (although you shouldn’t need more than what is in that example). You can then iterate through the indices of `$@` using `for idx in $(seq 1 $#); do ...; done`.
 
-**Note:** Using `seq` is… old school. Modern alternatives are:
-- To use a range: `{1..5}` evaluates to the string `1 2 3 4 5`, and can be used as `for idx in {1..$#}; do ...; done`.
-- Use an arithmetic `for` loop:
-
-```shell
-for (( i = 1; i <= $#; ++i )) do
-    # use $@[i]
-done
-```
+> **Note:** Using `seq` is… old school. Modern alternatives are:
+> - To use a range: `{1..5}` evaluates to the string `1 2 3 4 5`, and can be used as `for idx in {1..$#}; do ...; done`.
+> - Use an arithmetic `for` loop:
+> 
+> ```shell
+> for (( i = 1; i <= $#; ++i )) do
+>     # use $@[i]
+> done
+> ```
 
 - **More on variables**. Setting a variable is done using the syntax `var=value`, as we’ve seen. We are not allowed to use spaces around the equal sign (`var = value` in a shell means: execute the program `var` with two arguments, `=` and `value`). To set a variable to the output of a program, we can either use `read` as above, or the more idiomatic: `var=$(cmd)`. Note that `cmd` can be any command, for instance:
 
@@ -799,17 +799,17 @@ In the body of the inner loop, we compute the “similarity” of the files at `
 
 At the end, we can print the two filenames at our saved positions within `$@`, using `echo $@[save1]; echo $@[save2]`.
 
-**Note:** As we have seen, arithmetic is done through `$((math expr))`. Everything behaves pretty much like you would expect, including when mixing floating point numbers:
-
-```shell
-$ var=3
-$ echo $((var / 2))
-1
-$ echo $((var / 2.0))
-1.5
-```
-
-Note that the `$` sign in front of variables is optional and that spaces don’t matter. One bug you may experience is with the expression `$(($# - 1))`. This works as expected, but not if you remove the spaces; this is because `$#-` is a variable on its own (its meaning is not important) and `$#-1` is then interpreted as that variable followed by 1. Hence make sure to use either `$((# - 1))` (with our without spaces) or `$(($# - 1))` (with spaces).
+> **Note:** As we have seen, arithmetic is done through `$((math expr))`. Everything behaves pretty much like you would expect, including when mixing floating point numbers:
+> 
+> ```shell
+> $ var=3
+> $ echo $((var / 2))
+> 1
+> $ echo $((var / 2.0))
+> 1.5
+> ```
+> 
+> Note that the `$` sign in front of variables is optional and that spaces don’t matter. One bug you may experience is with the expression `$(($# - 1))`. This works as expected, but not if you remove the spaces; this is because `$#-` is a variable on its own (its meaning is not important) and `$#-1` is then interpreted as that variable followed by 1. Hence make sure to use either `$((# - 1))` (with our without spaces) or `$(($# - 1))` (with spaces).
 
 ## 10. Bonus Part: Reformat the output of wc
 
@@ -857,16 +857,16 @@ $ echo 'hello:world' | cut -d':' -f2
 world
 ```
 
-**Note:** Modern shells have an array type, that is less error-prone than trusting the shell to “do the right thing” when it comes to splitting. To convert a string into an array, we indicate how we want to split it. The syntax is a bit awkward, and oftentimes `cut` does the job. But in a case where you’d be interested in extracting multiple fields, it may be better to split with the shell feature; the syntax reads:
-
-```shell
-$ mystring='split:me::at:colons'
-$ ar=("${(@s/:/)mystring}")
-$ echo "1: $ar[1], 2: $ar[2], 3: $ar[3], 4: $ar[4], 5: $ar[5]"
-1: split, 2: me, 3: , 4: at, 5: colons
-```
-
-The `:` in the splitting can be changed to any separator.
+> **Note:** Modern shells have an array type, that is less error-prone than trusting the shell to “do the right thing” when it comes to splitting. To convert a string into an array, we indicate how we want to split it. The syntax is a bit awkward, and oftentimes `cut` does the job. But in a case where you’d be interested in extracting multiple fields, it may be better to split with the shell feature; the syntax reads:
+> 
+> ```shell
+> $ mystring='split:me::at:colons'
+> $ ar=("${(@s/:/)mystring}")
+> $ echo "1: $ar[1], 2: $ar[2], 3: $ar[3], 4: $ar[4], 5: $ar[5]"
+> 1: split, 2: me, 3: , 4: at, 5: colons
+> ```
+> 
+> The `:` in the splitting can be changed to any separator.
 
 - **case**: The `case` switch in shell scripting is used to compare a string against very simple patterns (globbing, just like for files). For instance:
 
@@ -913,7 +913,7 @@ $ make test
 
 This moves to the directory `tests` and runs the driver `./driver.sh`.
 
-**Note:** The driver itself is a shell script. All of your labs are evaluated using shell scripts and you have full access to the sources. They use, at times, advanced constructions, but reading them can be educational.
+> **Note:** The driver itself is a shell script. All of your labs are evaluated using shell scripts and you have full access to the sources. They use, at times, advanced constructions, but reading them can be educational.
 
 As you work on each successive parts, you may want to run the driver on each part separately and on smaller test files:
 
@@ -943,14 +943,16 @@ The result, for each test, is readily printed; in bracket, there’s a shorthand
 - `OK`: Test passed
 - `KO`: Test failed
 
-**Note:** The driver is executed from the `test` directory, hence to access your scripts, it needs to call them as, for instance, `../src/maxocc.sh`, which means “go to the parent directory, then to the `src` directory, then find `maxocc.sh`.”
+> **Note:** The driver is executed from the `test` directory, hence to access your scripts, it needs to call them as, for instance, `../src/maxocc.sh`, which means “go to the parent directory, then to the `src` directory, then find `maxocc.sh`.”
 
 ## 12. Handing in Your Work
 
 When you have completed the lab, you will submit it as follows:
 
 ```shell
-$ make submit
+$ git add src/*.sh
+$ git commit -m "update code"
+$ git push
 ```
 
-This will package your whole `src/` folder into a tarball that is saved in `~/submissions/`, where the instructor will get it. Since this is simply saved on your account, you can use `make submit` as many times as you want up until the deadline.
+**You may commit and push your code as many times as you want. Just keep in mind that you will also need to submit the screenshot proof of your submission on D2L.**
