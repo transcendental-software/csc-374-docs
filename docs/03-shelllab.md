@@ -98,20 +98,20 @@ $ sort
 4
 ```
 
->**Note:** As we’ve seen in the Dict Lab, when the input is provided from the shell, the key combo `Ctrl-d` ends the input. The program `sort` needs to read all of its input in order to produce any output. With programs that can produce output as they read input, looking at the terminal can be a bit weird. For instance, the program `cat`, without arguments, reads the standard input and repeats it on the standard output (it’s of nearly no use):
-
-```shell
-$ cat
-hello
-hello
-how do you do
-how do you do
-good talk
-good talk
-[Ctrl-d]
-```
-
->It takes a good understanding of what the command is doing in order to distinguish the input, typed by the user, and the output, printed by the program. Can you tell which is which?
+> **Note:** As we’ve seen in the Dict Lab, when the input is provided from the shell, the key combo `Ctrl-d` ends the input. The program `sort` needs to read all of its input in order to produce any output. With programs that can produce output as they read input, looking at the terminal can be a bit weird. For instance, the program `cat`, without arguments, reads the standard input and repeats it on the standard output (it’s of nearly no use):
+>
+> ```shell
+> $ cat
+> hello
+> hello
+> how do you do
+> how do you do
+> good talk
+> good talk
+> [Ctrl-d]
+>```
+>
+> It takes a good understanding of what the command is doing in order to distinguish the input, typed by the user, and the output, printed by the program. Can you tell which is which?
 
 In a shell, we can replace the standard input with a file. This is done with the `<` operator:
 
