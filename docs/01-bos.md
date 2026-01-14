@@ -384,4 +384,4 @@ If you simply run `vim FILE`, it will open `FILE` in normal mode. Press `i` to e
 
 If you simply run `emacs FILE`, it will open `FILE`, you can then save with `C-x C-s` and exit with `C-x C-c` (here, the Emacsian notation `C-KEY` is used to indicate `KEY` pressed together with the `CTRL` control key).
 
-[`emacs(1)`](https://man7.org/linux/man-pages/man1/emacs.1.html) is a powerful work environment, sometimes mocked as being a full OS. I strongly encourage you to read [Jess Hamrick’s Emacs Tutorial](http://www.jesshamrick.com/2012/09/10/absolute-beginners-guide-to-emacs/). It is superbly easy to follow, and will get you introduced to the very basics of Emacs in less than 30 minutes. This is time you will not regret investing.
+[`emacs(1)`](https://man7.org/linux/man-pages/man1/emacs.1.html) is a powerful work environment, sometimes mocked as being a full OS. I strongly encourage you to read [Jess Hamrick’s Emacs Tutorial](https://www.jesshamrick.com/post/2012-09-10-absolute-beginners-guide-to-emacs/). It is superbly easy to follow, and will get you introduced to the very basics of Emacs in less than 30 minutes. This is time you will not regret investing.
