@@ -393,4 +393,4 @@ $ git commit -m "update code"
 $ git push
 ```
 
-This will package your whole `src/` folder into a tarball that is saved in `~/submissions/`, where the instructor will get it. Since this is simply saved on your account, you can use `make submit` as many times as you want up until the deadline.
+**You may commit and push your code as many times as you want. Just keep in mind that you will also need to submit the screenshot proof of your submission on D2L.**
