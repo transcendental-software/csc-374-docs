@@ -172,7 +172,7 @@ void l1_get_stats (cache_stats_t* stats);
 
 > **Note:** Cache organization is detailed in Ch. 6, Lec. 4, an important slide being:
 >
-> !cache-organization.png
+> ![cache-organization.png](assets/cache-organization.png)
 >
 > Your implementation will reflect this, except for the fact that no bytes will be actually cached; we only keep the information on whether an address is cached or not.
 
