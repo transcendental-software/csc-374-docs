@@ -45,7 +45,7 @@ In this part, each test executes a series of `malloc`, [`free(1)`](https://man7.
 - Once measuring the time taken to complete all the operations, resulting in a *throughput* measure: the number of operations per second. This is measured in thousands of operations per second (Kops/s).
 - Once measuring the *utilization* of your implementation: this is the ratio between the maximum amount `malloc`’ed at any point and the maximum heap size.
 
-With $T$ and $U$ your average throughput and utilization over all tests, your final grade for this part is (roughly) computed as:
+With **T** and **U** your average throughput and utilization over all tests, your final grade for this part is (roughly) computed as:
 
 $$ 60 \times \left( \frac{T}{1500} \times 0.6 + \frac{U}{65} \times 0.4 \right). $$
 
